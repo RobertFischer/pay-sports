@@ -59,12 +59,3 @@ while(my($src,$file_data) = each %data_pages) {
   chmod 0644, "$file.json";
 }
 
-# Fix the rights_fees JSON
-my %old_rights = %{hashify("rights_fees.json", "key")};
-my %new_rights = ();
-
-while((undef, my $value_ref) = each %old_rights) {
-  my %values = %$value_ref;
-
-}
-
