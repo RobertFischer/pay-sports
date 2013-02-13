@@ -3,6 +3,7 @@
 use warnings;
 use strict;
 
+use local::lib;
 use HTTP::Tiny;
 use IO::Socket::SSL;
 use Net::SSLeay;
