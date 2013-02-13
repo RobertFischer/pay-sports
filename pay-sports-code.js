@@ -471,6 +471,8 @@ jQuery(function($) {
         container.queue('fx', fun);
       });
     });
+
+    return true;
   };
 
   var ajax_status = 0;
@@ -514,15 +516,10 @@ jQuery(function($) {
 
   var writeNetworkBlock = function(to, network) {
     var network_block = $('<div class="network_block"></div>');
-    var checkbox = $('<input type="checkbox">');
+    var checkbox = $('<input type="checkbox"></input>');
     checkbox.appendTo(network_block);
     $('<span class="network_label">' + network + '</span>').appendTo(network_block);
     network_block.appendTo(to);  // Now should be on the page
-
-    checkbox.click(function() {
-      if(ajax_status != 0) container.queue('fx', recalculateCosts);
-      return true;
-    });
 
     network_checkboxes[network] = checkbox;
   };
@@ -561,5 +558,11 @@ jQuery(function($) {
     "NFL Network", "MLB Network", "NBA TV", "NHL Network",
     "Big Ten Network", "Pac-12 Network"
   ]);
+
+  $("input:checkbox", container).each(function() {
+    $(this).click(recalculateCosts);
+  });
+
+
 
 });
