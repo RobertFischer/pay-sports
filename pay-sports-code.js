@@ -61,6 +61,7 @@ jQuery(function($) {
         block.data('amount', Math.max(0,old_amount-0.01));
         setTimeout(adjust, 200);
       } else {
+        alert("Setting the fadein to start for " + league);
         block.fadeIn('slow');
       }
     };
