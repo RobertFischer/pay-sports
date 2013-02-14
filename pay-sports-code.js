@@ -19,6 +19,7 @@ jQuery(function($) {
   };
 
   var number_to_dollars = function(num) {
+    if(isNaN(num)) return "$$$";
     num = Math.round(num*100)/100;
     return "$" + num;
   }
@@ -177,7 +178,7 @@ jQuery(function($) {
 
     // 'Carriage Fees'!B22*12
     if(has_network('NBA TV')) {
-      amount += dollars_to_number(carriage_fees['NBA TV']['Sub fee per month']*12);
+      amount += dollars_to_number(carriage_fees['NBA TV']['Sub fee per month'])*12;
     }
 
     update_amount('NBA', amount);
