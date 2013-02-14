@@ -566,6 +566,4 @@ jQuery(function($) {
     });
   });
 
-  container.queue("fx", function() { alert("Queue is running!"); });
-
 });
