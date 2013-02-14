@@ -62,7 +62,9 @@ jQuery(function($) {
         setTimeout(adjust, 200);
       } else {
         alert("Setting the fadein to start for " + league);
-        block.fadeIn('slow');
+        setTimeout(function() {
+          block.fadeIn('slow');
+        }, 250);
       }
     };
     queue(adjust);
