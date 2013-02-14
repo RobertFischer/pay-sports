@@ -310,7 +310,7 @@ jQuery(function($) {
       var carriage_fees_d5 = dollars_to_number(carriage_fees['ESPN2'][carriage_fees_d]);
       var carriage_fees_b4 = dollars_to_number(carriage_fees['ESPN'][carriage_fees_b]);
       var carriage_fees_b5 = dollars_to_number(carriage_fees['ESPN2'][carriage_fees_b]);
-      amount += rights_fees_c26 / (carriage_fees_d4 + carriage_fees_d5) *
+      amount += rights_fees_c27 / (carriage_fees_d4 + carriage_fees_d5) *
                 (carriage_fees_b4 + carriage_fees_b5) * 12;
     }
 
