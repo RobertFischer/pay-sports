@@ -452,6 +452,20 @@ jQuery(function($) {
     update_amount("SEC", amount);
   };
 
+  var recalculateNHL = function() {
+    var amount = 0;
+
+    // ='Rights Fees'!C9/'Carriage Fees'!D16*'Carriage Fees'!B16*12+'Carriage Fees'!B23*12
+    if(has_network('NBC Sports Network')) {
+      var rights_fees_c9 = dollars_to_number(rights_fees['NHL - NBC']['Per Year (millions)']);
+      var carriage_fees_d16 = dollars_to_number(carriage_fees['NBC Sports Network']['Per Year (millions)']);
+      var carriage_fees_b16 = dollars_to_number(carriage_fees['NBC Sports Network']['Sub fee per month']);
+      amount += rights_fees_c10/carriage_fees_d16*carriage_fees_b16*12;
+    }
+
+    update_amount("NHL", amount);
+  };
+
   var recalculateCosts = function() {
     $.each([
       recalculateNFL,
@@ -467,7 +481,8 @@ jQuery(function($) {
       recalculateBigTen,
       recalculateBigTwelve,
       recalculatePacTwelve,
-      recalculateSEC
+      recalculateSEC,
+      recalculateNHL
     ], function(index, fun) {
       fun();
     });
