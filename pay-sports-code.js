@@ -11,6 +11,12 @@ jQuery(function($) {
   var network_checkboxes = {};
 
   var container = $("div[pay-sports]");
+  var queue = function(fun) {
+    container.queue("fx", function(next) {
+      fun();
+      next();
+    });
+  };
 
   var dollars_to_number = function(it) {
     return parseFloat(it.replace(/^\$/, ""));
@@ -43,16 +49,16 @@ jQuery(function($) {
       if(amount >= (old_amount+0.01)) {
         $('.league_amount', block).text("$" + (old_amount+0.01));
         block.data('amount', old_amount+0.01);
-        block.queue("fx", adjust);
+        queue(adjust);
       } else if (amount <= (old_amount-0.01)) {
         $('.league_amount', block).text("$" + Math.max(0, old_amount-0.01));
         block.data('amount', Math.max(0,old_amount-0.01));
-        block.queue("fx", adjust);
+        queue(adjust);
       } else {
         block.fadeIn('slow');
       }
     };
-    block.queue("fx", adjust);
+    queue(adjust);
   };
 
   var recalculateNFL = function() {
@@ -467,10 +473,7 @@ jQuery(function($) {
       // The double-enqueueing gives changes from one function
       // a chance to take before the next fires. Helps keep the
       // queue smaller and initiate animations sooner.
-      alert(index + ":\n" + fun);
-      container.queue('fx', function() {
-        container.queue('fx', fun);
-      });
+      queue(function() { queue(fun); });
     });
 
     return true;
@@ -485,7 +488,7 @@ jQuery(function($) {
       });
       ajax_status += 1;
       if(ajax_status == 0 && $("input:checkbox:checked", container).size() > 0) {
-        container.queue('fx', recalculateCosts);
+        queue(recalculateCosts);
       }
     });
     return object;
