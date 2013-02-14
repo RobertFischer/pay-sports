@@ -41,23 +41,7 @@ jQuery(function($) {
 
   var update_amount = function(league, amount) {
     var block = league_blocks[league];
-    block.data('target-amount', Math.max(0, amount));
-
-    var adjust = null;
-    adjust = function() {
-      var amount = block.data('target-amount');
-      var old_amount = block.data('amount');
-      if((old_amount+0.01) <= amount) {
-        $('.league_amount', block).text(number_to_dollars(old_amount+0.01));
-        block.data('amount', old_amount+0.01);
-        setTimeout(adjust, 100 * Math.random() + 1);
-      } else if ((old_amount-0.01) >= amount) {
-        $('.league_amount', block).text(number_to_dollars(old_amount-0.01));
-        block.data('amount', old_amount-0.01);
-        setTimeout(adjust, 100 * Math.random() + 1);
-      }
-    };
-    adjust();
+    $('.league_amount', block).text(number_to_dollars(amount));
   };
 
   var recalculateNFL = function() {
