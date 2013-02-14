@@ -54,11 +54,11 @@ jQuery(function($) {
       if((old_amount+0.01) <= amount) {
         $('.league_amount', block).text(number_to_dollars(old_amount+0.01));
         block.data('amount', old_amount+0.01);
-        setTimeout(adjust, 1000);
+        setTimeout(adjust, 100);
       } else if ((old_amount-0.01) >= amount) {
         $('.league_amount', block).text(number_to_dollars(Math.max(0, old_amount-0.01)));
         block.data('amount', Math.max(0,old_amount-0.01));
-        setTimeout(adjust, 1000);
+        setTimeout(adjust, 100);
       } else {
         block.fadeIn('slow');
       }
