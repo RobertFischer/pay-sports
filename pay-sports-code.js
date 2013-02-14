@@ -563,7 +563,7 @@ jQuery(function($) {
     $(this).click(function() {
       if(ajax_status == 0) recalculateCosts();
       return true;
-    );
+    });
   });
 
   container.queue("fx", function() { alert("Queue is running!"); });
