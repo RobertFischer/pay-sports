@@ -68,7 +68,8 @@ jQuery(function($) {
       } else {
         alert("Setting the fadein to start for " + league);
         setTimeout(function() {
-          block.fadeIn('slow');
+          alert("Starting the fade in for " + league);
+          $(block).fadeIn('slow', function() { alert("Done fading in for " + league); );
         }, 250);
       }
     };
