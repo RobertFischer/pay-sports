@@ -12,9 +12,9 @@ jQuery(function($) {
 
   var container = $("div[pay-sports]");
   var queue = function(fun) {
-    container.queue("fx", function(next) {
+    container.queue("fx", function() {
       fun();
-      next();
+      $(this).dequeue();
     });
   };
 
@@ -64,9 +64,7 @@ jQuery(function($) {
         block.data('amount', old_amount-0.01);
         setTimeout(adjust, 200);
       } else {
-        queue(function() {
-          block.fadeIn('slow');
-        });
+        block.fadeIn('slow');
       }
     };
     adjust();
