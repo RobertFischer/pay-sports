@@ -467,6 +467,7 @@ jQuery(function($) {
       // The double-enqueueing gives changes from one function
       // a chance to take before the next fires. Helps keep the
       // queue smaller and initiate animations sooner.
+      alert(index + ":\n" + fun);
       container.queue('fx', function() {
         container.queue('fx', fun);
       });
