@@ -50,11 +50,11 @@ jQuery(function($) {
       if((old_amount+0.01) <= amount) {
         $('.league_amount', block).text(number_to_dollars(old_amount+0.01));
         block.data('amount', old_amount+0.01);
-        setTimeout(adjust, 200 * random() + 20);
+        setTimeout(adjust, 200 * Math.random() + 1);
       } else if ((old_amount-0.01) >= amount) {
         $('.league_amount', block).text(number_to_dollars(old_amount-0.01));
         block.data('amount', old_amount-0.01);
-        setTimeout(adjust, 200 * random() + 20);
+        setTimeout(adjust, 200 * Math.random() + 1);
       }
     };
     adjust();
