@@ -20,7 +20,12 @@ jQuery(function($) {
 
   var number_to_dollars = function(num) {
     if(isNaN(num)) return "$$$";
-    num = Math.round(num*100)/100;
+    num = (Math.round(num*100)/100).toString();
+    if(/^\d+$/.test(num)) {
+      num = num + ".00";
+    } else if(/^\d+\.\d$/.test(num)) {
+      num = num + "0";
+    }
     return "$" + num;
   }
 
