@@ -54,11 +54,11 @@ jQuery(function($) {
       if((old_amount+0.01) <= amount) {
         $('.league_amount', block).text(number_to_dollars(old_amount+0.01));
         block.data('amount', old_amount+0.01);
-        queue(adjust);
+        set_timeout(adjust, 1000);
       } else if ((old_amount-0.01) >= amount) {
         $('.league_amount', block).text(number_to_dollars(Math.max(0, old_amount-0.01)));
         block.data('amount', Math.max(0,old_amount-0.01));
-        queue(adjust);
+        set_timeout(adjust, 1000);
       } else {
         block.fadeIn('slow');
       }
@@ -310,7 +310,7 @@ jQuery(function($) {
       var carriage_fees_d5 = dollars_to_number(carriage_fees['ESPN2'][carriage_fees_d]);
       var carriage_fees_b4 = dollars_to_number(carriage_fees['ESPN'][carriage_fees_b]);
       var carriage_fees_b5 = dollars_to_number(carriage_fees['ESPN2'][carriage_fees_b]);
-      amount += rights_fees_c15 / (carriage_fees_d4 + carriage_fees_d5) *
+      amount += rights_fees_c26 / (carriage_fees_d4 + carriage_fees_d5) *
                 (carriage_fees_b4 + carriage_fees_b5) * 12;
     }
 
