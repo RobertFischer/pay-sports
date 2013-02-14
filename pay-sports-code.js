@@ -11,12 +11,6 @@ jQuery(function($) {
   var network_checkboxes = {};
 
   var container = $("div[pay-sports]");
-  var queue = function(fun) {
-    container.queue("fx", function() {
-      fun();
-      $(this).dequeue();
-    });
-  };
 
   var number_to_dollars = function(num) {
     if(isNaN(num)) return "$$$";
@@ -479,10 +473,7 @@ jQuery(function($) {
       recalculatePacTwelve,
       recalculateSEC
     ], function(index, fun) {
-      // The double-enqueueing gives changes from one function
-      // a chance to take before the next fires. Helps keep the
-      // queue smaller and initiate animations sooner.
-      queue(function() { queue(fun); });
+      fun();
     });
 
     return true;
@@ -497,7 +488,7 @@ jQuery(function($) {
       });
       ajax_status += 1;
       if(ajax_status == 0 && $("input:checkbox:checked", container).size() > 0) {
-        queue(recalculateCosts);
+        recalculateCosts();
       }
     });
     return object;
