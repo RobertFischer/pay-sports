@@ -43,8 +43,6 @@ jQuery(function($) {
     var block = league_blocks[league];
     block.data('target-amount', Math.max(0, amount));
 
-    block.fadeTo('slow', 0.25);
-
     var adjust = null;
     adjust = function() {
       var amount = block.data('target-amount');
@@ -57,9 +55,6 @@ jQuery(function($) {
         $('.league_amount', block).text(number_to_dollars(old_amount-0.01));
         block.data('amount', old_amount-0.01);
         setTimeout(adjust, 150);
-      } else {
-        alert("Should be fading in:\n" + block.text());
-        block.fadeIn('slow');
       }
     };
     adjust();
