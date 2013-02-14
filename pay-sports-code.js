@@ -18,6 +18,11 @@ jQuery(function($) {
     });
   };
 
+  var number_to_dollars = function(num) {
+    num = Math.round(num*100)/100;
+    return "$" + num;
+  }
+
   var dollars_to_number = function(it) {
     return parseFloat(it.replace(/^\$/, ""));
   };
@@ -46,12 +51,12 @@ jQuery(function($) {
     adjust = function() {
       var amount = block.data('target-amount');
       var old_amount = block.data('amount');
-      if(amount >= (old_amount+0.01)) {
-        $('.league_amount', block).text("$" + (old_amount+0.01));
+      if((old_amount+0.01) <= amount) {
+        $('.league_amount', block).text(number_to_dollars(old_amount+0.01));
         block.data('amount', old_amount+0.01);
         queue(adjust);
-      } else if (amount <= (old_amount-0.01)) {
-        $('.league_amount', block).text("$" + Math.max(0, old_amount-0.01));
+      } else if ((old_amount-0.01) >= amount) {
+        $('.league_amount', block).text(number_to_dollars(Math.max(0, old_amount-0.01)));
         block.data('amount', Math.max(0,old_amount-0.01));
         queue(adjust);
       } else {
@@ -216,7 +221,7 @@ jQuery(function($) {
     var amount = 0;
 
     // ='Rights Fees'!C13/'Carriage Fees'!D14*'Carriage Fees'!B14*12
-    if(has_network('Fox Soccer')) {
+    if(has_network('Fox Soccer Channel')) {
       var rights_fees_c13 = dollars_to_number(rights_fees['Premier League - Fox Soccer']['Per Year (millions)']);
       var carriage_fees_d14 = dollars_to_number(carriage_fees['Fox Soccer']['Per Year (millions)']);
       var carriage_fees_b14 = dollars_to_number(carriage_fees['Fox Soccer']['Sub fee per month']);
