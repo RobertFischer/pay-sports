@@ -49,9 +49,7 @@ jQuery(function($) {
     var block = league_blocks[league];
     block.data('target-amount', Math.max(0, amount));
 
-    if(block.data('target-amount') == block.data('amount')) return true;
-
-    block.fadeTo("fast", 0.25);
+    block.fadeTo('slow', 0.25);
 
     var adjust = null;
     adjust = function() {
@@ -62,18 +60,16 @@ jQuery(function($) {
         block.data('amount', old_amount+0.01);
         setTimeout(adjust, 200);
       } else if ((old_amount-0.01) >= amount) {
-        $('.league_amount', block).text(number_to_dollars(Math.max(0, old_amount-0.01)));
-        block.data('amount', Math.max(0,old_amount-0.01));
+        $('.league_amount', block).text(number_to_dollars(old_amount-0.01));
+        block.data('amount', old_amount-0.01);
         setTimeout(adjust, 200);
       } else {
-        alert("Setting the fadein to start for " + league);
-        setTimeout(function() {
-          alert("Starting the fade in for " + league);
-          $(block).fadeIn('slow', function() { alert("Done fading in for " + league); );
-        }, 250);
+        queue(function() {
+          block.fadeIn('slow');
+        });
       }
     };
-    queue(adjust);
+    adjust();
   };
 
   var recalculateNFL = function() {
@@ -312,7 +308,7 @@ jQuery(function($) {
   };
 
   var recalculateACC = function() {
-    var amount = 1;
+    var amount = 0;
 
     if(has_espn()) {
       var rights_fees_c27 = dollars_to_number(rights_fees['ACC - ESPN'][rights_fees_c]);
