@@ -77,7 +77,7 @@ jQuery(function($) {
     $.getJSON(url, function(data) {
       $.each(data, function(key, val) {
 				if($.inArray(key, dollar_fields)) {
-					val = dollars_to_number(dollar_fields);
+					val = dollars_to_number(val);
 				}
         object[key] = val;
       });
