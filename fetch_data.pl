@@ -65,11 +65,11 @@ while(my($src,$file_data) = each %data_pages) {
 # Fix rights fees
 open($fh, "<", "rights_fees_original.json") or die "Cannot open rights_fees_original.json for re-reading";
 my %json = %{decode_json(scalar(<$fh>))};
+close $fh;
 my %new_rights = ();
 while(my($key,$data) = each %json) {
 	$new_rights{$data->{League}}->{$data->{Network}} = $data->{'Per Year (millions)'};
 }
-close $fh;
 ($fh,$filename) = tempfile();
 print $fh encode_json(\%new_rights);
 close $fh;
