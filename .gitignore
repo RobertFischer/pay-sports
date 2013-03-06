@@ -5,3 +5,4 @@
 .gradle
 *.csv
 *.json
+.*.swp
