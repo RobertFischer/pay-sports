@@ -6,3 +6,5 @@
 *.csv
 *.json
 .*.swp
+favicon.*
+
