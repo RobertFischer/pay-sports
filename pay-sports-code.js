@@ -77,6 +77,7 @@ jQuery(function($) {
     $.getJSON(url, function(data) {
       $.each(data, function(key, val) {
 				if($.inArray(key, dollar_fields)) {
+					alert("Converting " + val + " for key " + key);
 					val = dollars_to_number(val);
 				}
         object[key] = val;
@@ -94,6 +95,7 @@ jQuery(function($) {
   fetchJSON("rights_fees.json", rights_fees, [], function() {
 		$.each(rights_fees, function(index, league) {
 			$.each(rights_fees[league], function(index, network) {
+				alert("Converting rights_fees[" + league + "][" + network + "]: " + rights_fees[league][network]);
 				rights_fees[league][network] = dollars_to_number(rights_fees[league][network]);
 			});
 		});
