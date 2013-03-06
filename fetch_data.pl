@@ -19,7 +19,7 @@ my %data_pages = (
     key => "Network"
   },
   'https://docs.google.com/spreadsheet/pub?key=0Asznh-RbUyRIdEdLRVQ3bU80VG1Mc1ZXMDExcUNhTmc&single=true&gid=2&range=A3%3AD29&output=csv' => {
-    file => "rights_fees",
+    file => "rights_fees_original",
     key => "Key"
   },
   'https://docs.google.com/spreadsheet/pub?key=0Asznh-RbUyRIdEdLRVQ3bU80VG1Mc1ZXMDExcUNhTmc&single=true&gid=1&range=A3%3AV26&output=csv' => {
@@ -27,6 +27,8 @@ my %data_pages = (
     key => "Channels"
   }
 );
+
+my($fh,$filename);
 
 while(my($src,$file_data) = each %data_pages) {
   my $file = $file_data->{'file'};
@@ -40,7 +42,7 @@ while(my($src,$file_data) = each %data_pages) {
   }
 
   # Take out the empty lines
-  my($fh,$filename) = tempfile();
+  ($fh,$filename) = tempfile();
   open(my $csvfh, "<", "$file.csv") or die "Cannot open the CSV file for filtering: $!";
   foreach my $line (grep(!/^,*$/, <$csvfh>)) {
     chomp $line;
@@ -60,3 +62,16 @@ while(my($src,$file_data) = each %data_pages) {
   chmod 0644, "$file.json";
 }
 
+# Fix rights fees
+open($fh, "<", "rights_fees_original.json") or die "Cannot open rights_fees_original.json for re-reading";
+my %json = %{decode_json(scalar(<$fh>))};
+my %new_rights = ();
+while(my($key,$data) = each %json) {
+	$new_rights{$data->{League}}->{$data->{Network}} = $data->{'Per Year (millions)'};
+}
+close $fh;
+($fh,$filename) = tempfile();
+print $fh encode_json(\%new_rights);
+close $fh;
+move($filename, "rights_fees.json") or die "Could not rename the fixed rights temp file to rights_fees.json";
+chmod 0644, "rights_fees.json";
