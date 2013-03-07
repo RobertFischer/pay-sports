@@ -8,6 +8,7 @@ jQuery(function($) {
 		ESPN: "ESPN (1/2)",
 		Fox: "Fox Sports Networks",
 		FOX: "Fox Sports Networks"
+		"Fox Sports": "Fox Sports Networks"
 	};
 
 	var rights_fees = {};
