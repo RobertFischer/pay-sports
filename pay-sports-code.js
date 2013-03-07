@@ -75,7 +75,12 @@ jQuery(function($) {
 		var amount = 0;
 		$.each(data, function(network, amount) {
 			if(network_checked(network)) {
-				amount += amount / carriage_fees[network][carriage_fees.HOMES];
+				var network_carriage_fees = carriage_fees[network];
+				if(!network_carriage_fees) {
+					var alias = network_aliases[network];
+					if(alias) network_carriage_fees = carriage_fees[network];
+				}
+				amount += amount / network_carriage_fees[carriage_fees.HOMES];
 			}
 		});
 		$.each([' Network', ' TV'], function(suffix) {
