@@ -5,7 +5,9 @@ jQuery(function($) {
 		NBC: "NBC Sports Network",
 		CBS: "CBS Sports Network",
 		Turner: "TNT / TBS",
-		ESPN: "ESPN (1/2)"
+		ESPN: "ESPN (1/2)",
+		Fox: "Fox Sports",
+		FOX: "Fox Sports"
 	};
 
 	var rights_fees = {};
