@@ -2,10 +2,10 @@ jQuery.noConflict();
 jQuery(function($) {
 
 	var network_aliases = {
-		"NBC Sports Network": "NBC",
-		"CBS Sports Network": "CBS",
-		"TNT / TBS": "Turner",
-		"ESPN (1/2)": "ESPN"
+		NBC: "NBC Sports Network",
+		CBS: "CBS Sports Network",
+		Turner: "TNT / TBS",
+		ESPN: "ESPN (1/2)"
 	};
 
 	var rights_fees = {};
