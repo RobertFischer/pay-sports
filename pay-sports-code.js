@@ -78,7 +78,7 @@ jQuery(function($) {
 				var network_carriage_fees = carriage_fees[network];
 				if(!network_carriage_fees) {
 					var alias = network_aliases[network];
-					if(alias) network_carriage_fees = carriage_fees[network];
+					if(alias) network_carriage_fees = carriage_fees[alias];
 				}
 				amount += amount / network_carriage_fees[carriage_fees.HOMES];
 			}
