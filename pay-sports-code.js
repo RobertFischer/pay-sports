@@ -31,7 +31,13 @@ jQuery(function($) {
   };
 
   var network_checked = function(network) {
-    return network_checkboxes[network].is(":checked");
+		var network_checkbox = network_checkboxes[network];
+		if(network_checkbox) {
+			return network_checkbox.is(":checked");
+		} else {
+			alert("Unknown network: " + network + "\nOptions: " + $.makeArray(network_checkboxes).join(", "));
+			return false;
+		}
   }
 
   var update_amount = function(league, amount) {
