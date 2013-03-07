@@ -6,8 +6,8 @@ jQuery(function($) {
 		CBS: "CBS Sports Network",
 		Turner: "TNT / TBS",
 		ESPN: "ESPN (1/2)",
-		Fox: "Fox Sports",
-		FOX: "Fox Sports"
+		Fox: "Fox Sports Networks",
+		FOX: "Fox Sports Networks"
 	};
 
 	var rights_fees = {};
@@ -75,14 +75,14 @@ jQuery(function($) {
 
 	var recalculate_league_costs = function(league, data) {
 		var amount = 0;
-		$.each(data, function(network, amount) {
+		$.each(data, function(network, rights_fee) {
 			if(network_checked(network)) {
 				var network_carriage_fees = carriage_fees[network];
 				if(!network_carriage_fees) {
 					var alias = network_aliases[network];
 					if(alias) network_carriage_fees = carriage_fees[alias];
 				}
-				amount += amount / network_carriage_fees[carriage_fees.HOMES];
+				amount += rights_fee / network_carriage_fees[carriage_fees.HOMES];
 			}
 		});
 		$.each([' Network', ' TV'], function(suffix) {
@@ -190,7 +190,7 @@ jQuery(function($) {
 	network_container.appendTo(container);
 
 	write_network_row(network_container, "first", [
-		"ESPN (1/2)", "ESPNU", "TNT / TBS", "Fox Sports", "Fox Soccer",
+		"ESPN (1/2)", "ESPNU", "TNT / TBS", "Fox Sports Networks", "Fox Soccer",
 		"NBC Sports Network", "CBS Sports Network"
 	]);
 	write_network_row(network_container, "second", [
