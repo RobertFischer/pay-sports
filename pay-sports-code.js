@@ -26,7 +26,10 @@ jQuery(function($) {
   var container = $("div[pay-sports]");
 
   var number_to_dollars = function(num) {
-    if(isNaN(num)) return "$$$";
+    if(isNaN(num)) {
+			alert("Found NaN");
+			return "$$$";	
+		}
     num = (Math.round(num*100)/100).toString();
     if(/^\d+$/.test(num)) {
       num = num + ".00";
@@ -149,7 +152,7 @@ jQuery(function($) {
     league_block.data("amount", 0);
     league_block.appendTo(to);
 
-    var amount = $('<div class="league_amount">$$$</div>');
+    var amount = $('<div class="league_amount">$0.00</div>');
     amount.appendTo(league_block);
 
     var name = $('<div class="league_name">' + league + '</div>');
