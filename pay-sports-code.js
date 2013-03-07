@@ -51,24 +51,18 @@ jQuery(function($) {
 
 	var recalculate_league_costs = function(league) {
 		var amount = 0;
-		$.each(rights_fees[league], function(index, network) {
+		$.each(rights_fees[league], function(network, amount) {
 			if(network_checked(network)) {
-				if(is_league_network(league, network)) {
-					amount += carriage_fees[network][carriage_fees.AMOUNT] * 12;
-				} else {
-					amount += rights_fees[league][network] / carriage_fees[network][carriage_fees.HOMES];
-				}
+				amount += amount / carriage_fees[network][carriage_fees.HOMES];
 			}
 		});
+		$.each([' Network', ' TV'], function(suffix) {
+			var network = league + suffix;
+			if(carriage_fees[network]) {
+				amount += carriage_fees[network][carriage_fees.AMOUNT] * 12;
+			}
+		}
 		update_amount(league, amount);
-	};
-
-	var is_league_network = function(league, network) {
-		if(league == "MLB" && network == "MLB Network") return true;
-		if(league == "NFL" && network == "NFL Network") return true;
-		if(league == "NBA" && network == "NBA TV") return true;
-		if(league == "NHL" && network == "NHL TV") return true;
-		return false;
 	};
 
   var ajax_status = 0;
