@@ -171,7 +171,7 @@ jQuery(function($) {
     network_column.appendTo(to);
   };
 
-	var network_container = $('<div id="network_container></div>');
+	var network_container = $('<div id="network_container"></div>');
 	network_container.append($('<h3>Click on the Networks You Currently Receive from Your Pay TV Service</h3>'));
 	network_container.appendTo(container);
 
