@@ -171,39 +171,35 @@ jQuery(function($) {
     network_column.appendTo(to);
   };
 
-	$(function() {
-		var network_container = $('<div id="network_container></div>');
-		network_container.append($('<h3>Click on the Networks You Currently Receive from Your Pay TV Service</h3>'));
-		network_container.appendTo(container);
+	var network_container = $('<div id="network_container></div>');
+	network_container.append($('<h3>Click on the Networks You Currently Receive from Your Pay TV Service</h3>'));
+	network_container.appendTo(container);
 
-		write_network_row(network_container, "first", [
-			"ESPN (1/2)", "ESPNU", "TNT / TBS", "Fox Sports", "Fox Soccer",
-			"NBC Sports Network", "CBS Sports Network"
-		]);
-		write_network_row(network_container, "second", [
-			"NFL Network", "MLB Network", "NBA TV", "NHL Network", 
-			"Big Ten Network", "Pac-12 Network", "Galavision"
-		]);
-	});
+	write_network_row(network_container, "first", [
+		"ESPN (1/2)", "ESPNU", "TNT / TBS", "Fox Sports", "Fox Soccer",
+		"NBC Sports Network", "CBS Sports Network"
+	]);
+	write_network_row(network_container, "second", [
+		"NFL Network", "MLB Network", "NBA TV", "NHL Network", 
+		"Big Ten Network", "Pac-12 Network", "Galavision"
+	]);
 
-	$(function() {
-		var leagues_container = $('<div id="leagues_container"></div>');
-		leagues_container.append($('<h3>Here is How Much of Your Money Goes Directly to Major Pro and College Sports</h3>'));
-		leagues_container.appendTo(container);
+	var leagues_container = $('<div id="leagues_container"></div>');
+	leagues_container.append($('<h3>Here is How Much of Your Money Goes Directly to Major Pro and College Sports</h3>'));
+	leagues_container.appendTo(container);
 
-		write_league_row(leagues_container, "first", [ "NFL", "MLB", "NBA" ]);
-		write_league_row(leagues_container, "second", [ "NHL", "MLS", "EPL" ]);
-		write_league_row(leagues_container, "third", [ "NASCAR" ]);
-		write_league_row(leagues_container, "empty", [ ]);
-		write_league_row(leagues_container, "fourth", [ "BCS", "NCAA", "NIT" ]);
-		write_league_row(leagues_container, "fifth", [ "ACC", "Big East", "Big Ten" ]);
-		write_league_row(leagues_container, "sixth", [ "Big 12", "Pac-12", "SEC" ]);
+	write_league_row(leagues_container, "first", [ "NFL", "MLB", "NBA" ]);
+	write_league_row(leagues_container, "second", [ "NHL", "MLS", "EPL" ]);
+	write_league_row(leagues_container, "third", [ "NASCAR" ]);
+	write_league_row(leagues_container, "empty", [ ]);
+	write_league_row(leagues_container, "fourth", [ "BCS", "NCAA", "NIT" ]);
+	write_league_row(leagues_container, "fifth", [ "ACC", "Big East", "Big Ten" ]);
+	write_league_row(leagues_container, "sixth", [ "Big 12", "Pac-12", "SEC" ]);
 
-		$("input:checkbox", leagues_container).each(function() {
-			$(this).click(function() {
-				if(ajax_status == 0) recalculateCosts();
-				return true;
-			});
+	$("input:checkbox", network_container).each(function() {
+		$(this).click(function() {
+			if(ajax_status == 0) recalculateCosts();
+			return true;
 		});
 	});
 
