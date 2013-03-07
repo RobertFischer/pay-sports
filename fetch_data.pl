@@ -14,15 +14,15 @@ use File::Temp "tempfile";
 use File::Copy;
 
 my %data_pages = (
-  'https://docs.google.com/spreadsheet/pub?key=0Asznh-RbUyRIdEdLRVQ3bU80VG1Mc1ZXMDExcUNhTmc&single=true&gid=0&range=A3%3AD25&output=csv' => {
+  'https://docs.google.com/spreadsheet/pub?key=0Asznh-RbUyRIdEdLRVQ3bU80VG1Mc1ZXMDExcUNhTmc&single=true&gid=0&range=A3%3AD100&output=csv' => {
     file => "carriage_fees",
     key => "Network"
   },
-  'https://docs.google.com/spreadsheet/pub?key=0Asznh-RbUyRIdEdLRVQ3bU80VG1Mc1ZXMDExcUNhTmc&single=true&gid=2&range=A3%3AD29&output=csv' => {
+  'https://docs.google.com/spreadsheet/pub?key=0Asznh-RbUyRIdEdLRVQ3bU80VG1Mc1ZXMDExcUNhTmc&single=true&gid=2&range=A3%3AD100&output=csv' => {
     file => "rights_fees_original",
     key => "Key"
   },
-  'https://docs.google.com/spreadsheet/pub?key=0Asznh-RbUyRIdEdLRVQ3bU80VG1Mc1ZXMDExcUNhTmc&single=true&gid=1&range=A3%3AV26&output=csv' => {
+  'https://docs.google.com/spreadsheet/pub?key=0Asznh-RbUyRIdEdLRVQ3bU80VG1Mc1ZXMDExcUNhTmc&single=true&gid=1&range=A3%3AV100&output=csv' => {
     file => "packages",
     key => "Channels"
   }
