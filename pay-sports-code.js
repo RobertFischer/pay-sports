@@ -132,22 +132,13 @@ jQuery(function($) {
 	});
 
 	var check_league = function(league) {
-		if(!$.inArray(league, rights_fees)) {
-			alert("Unknown league: " + league + "\nOptions: " + $.makeArray(rights_fees).join(", "));
-		}
+		// TODO Implement this
+		return true;
 	};
 
 	var check_network = function(network, source) {
-		var all_networks = [];
-		$.each(rights_fees, function(index, league) {
-			$.merge(all_networks, $.makeArray(rights_fees[league]));
-		});
-		all_networks = $.grep(all_networks, function(v,k) {
-			return $.inArray(v,arr) === k;
-		});
-		if(!$.inArray(network, all_networks)) {
-			alert("Unknown network found in " + source + ": " + network + "\nOptions: " + all_networks.join(", "));
-		}
+		// TODO Implement this
+		return true;
 	};
 
   var writeLeagueBlock = function(to, league) {
