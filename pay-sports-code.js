@@ -61,7 +61,7 @@ jQuery(function($) {
 			if(carriage_fees[network]) {
 				amount += carriage_fees[network][carriage_fees.AMOUNT] * 12;
 			}
-		}
+		});
 		update_amount(league, amount);
 	};
 
