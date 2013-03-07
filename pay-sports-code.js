@@ -42,16 +42,16 @@ jQuery(function($) {
   };
 
 	var recalculate_costs = function() {
-		$.each(rights_fees, function(index, league) {
+		$.each(rights_fees, function(league, data) {
 			$(function() {
-				recalculate_league_costs(league);
+				recalculate_league_costs(league, data);
 			});
 		});
 	};
 
-	var recalculate_league_costs = function(league) {
+	var recalculate_league_costs = function(league, data) {
 		var amount = 0;
-		$.each(rights_fees[league], function(network, amount) {
+		$.each(data, function(network, amount) {
 			if(network_checked(network)) {
 				amount += amount / carriage_fees[network][carriage_fees.HOMES];
 			}
