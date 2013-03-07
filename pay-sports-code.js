@@ -72,14 +72,10 @@ jQuery(function($) {
 	};
 
   var ajax_status = 0;
-  var fetchJSON = function(url, object, dollar_fields, callback) {
+  var fetchJSON = function(url, object, callback) {
     ajax_status -= 1;
     $.getJSON(url, function(data) {
       $.each(data, function(key, val) {
-				if($.inArray(key, dollar_fields)) {
-					alert("Converting " + val + " for key " + key);
-					val = dollars_to_number(val);
-				}
         object[key] = val;
       });
 			if(callback) callback(data);
@@ -92,15 +88,14 @@ jQuery(function($) {
     });
     return object;
   };
-  fetchJSON("rights_fees.json", rights_fees, [], function() {
+  fetchJSON("rights_fees.json", rights_fees, function() {
 		$.each(rights_fees, function(index, league) {
 			$.each(rights_fees[league], function(index, network) {
-				alert("Converting rights_fees[" + league + "][" + network + "]: " + rights_fees[league][network]);
 				rights_fees[league][network] = dollars_to_number(rights_fees[league][network]);
 			});
 		});
 
-		fetchJSON("carriage_fees.json", carriage_fees, [carriage_fees.AMOUNT, carriage_fees.MONTHLY_FEE], function(cr_data) {
+		fetchJSON("carriage_fees.json", carriage_fees, function(cr_data) {
 			$.each(cr_data, function(index, network) {
 				check_network(network, "carriage_fees.json");
 			});
