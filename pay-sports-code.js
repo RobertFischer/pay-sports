@@ -2,7 +2,7 @@ jQuery.noConflict();
 jQuery(function($) {
 
 	var network_aliases = {
-		"NBC Sports Network", "NBC",
+		"NBC Sports Network": "NBC",
 		"CBS Sports Network": "CBS",
 		"TNT / TBS": "Turner",
 		"ESPN (1/2)": "ESPN"
