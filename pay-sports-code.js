@@ -1,6 +1,13 @@
 jQuery.noConflict();
 jQuery(function($) {
 
+	var network_aliases = {
+		"NBC Sports Network", "NBC",
+		"CBS Sports Network": "CBS",
+		"TNT / TBS": "Turner",
+		"ESPN (1/2)": "ESPN"
+	};
+
 	var rights_fees = {};
 
 	var carriage_fees = {
@@ -30,10 +37,19 @@ jQuery(function($) {
     return parseFloat(it.replace(/^\$/, ""));
   };
 
+	var network_checkbox = function(network) {
+		var it = network_checkboxes[network];
+		if(!it) {
+			var alias = network_aliases[network];
+			if(alias) it = network_checkboxes[alias];
+		}
+		return it;
+	};
+
   var network_checked = function(network) {
-		var network_checkbox = network_checkboxes[network];
-		if(network_checkbox) {
-			return network_checkbox.is(":checked");
+		var it = network_checkbox(network);
+		if(it) {
+			return it.is(":checked");
 		} else {
 			alert("Unknown network: " + network + "\nOptions: " + $.makeArray(network_checkboxes).join(", "));
 			return false;
