@@ -89,15 +89,21 @@ jQuery(function($) {
     return object;
   };
   fetchJSON("rights_fees.json", rights_fees, function() {
-		$.each(rights_fees, function(index, league) {
-			$.each(rights_fees[league], function(index, network) {
-				rights_fees[league][network] = dollars_to_number(rights_fees[league][network]);
+		$.each(rights_fees, function(league, networks) {
+			$.each(networks, function(network, amount) {
+				rights_fees[league][network] = dollars_to_number(amount);
 			});
 		});
 
 		fetchJSON("carriage_fees.json", carriage_fees, function(cr_data) {
-			$.each(cr_data, function(index, network) {
+			$.each(cr_data, function(network, data) {
 				check_network(network, "carriage_fees.json");
+
+				$.each(data, function(field, value) {
+					if(field == carriage_fees.MONTHLY_FEE || field == carriage_fees.AMOUNT) {
+						carriage_fees[network][field] = dollars_to_number(value);
+					}
+				});
 			});
 		});
 	});
