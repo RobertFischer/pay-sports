@@ -198,7 +198,7 @@ jQuery(function($) {
 
 	$("input:checkbox", network_container).each(function() {
 		$(this).click(function() {
-			if(ajax_status == 0) recalculateCosts();
+			if(ajax_status == 0) recalculate_costs();
 			return true;
 		});
 	});
