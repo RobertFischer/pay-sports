@@ -59,10 +59,8 @@ jQuery(function($) {
 		var it = network_checkbox(network);
 		if(it) {
 			return it.is(":checked");
-		} else {
-			alert("Unknown network: " + network + "\nOptions: " + $.makeArray(network_checkboxes).join(", "));
-			return false;
-		}
+		} 
+		return false;
   }
 
   var update_amount = function(league, amount) {
@@ -94,7 +92,7 @@ jQuery(function($) {
 		});
 		$.each([' Network', ' TV'], function(index, suffix) {
 			var network = league + suffix;
-			if(carriage_fees[network]) {
+			if(network_checked(network) && carriage_fees[network]) {
 				amount += carriage_fees[network][carriage_fees.MONTHLY_FEE] * 12;
 			}
 		});
@@ -201,7 +199,7 @@ jQuery(function($) {
 		"NBC Sports Network", "CBS Sports Network"
 	]);
 	write_network_row(network_container, "second", [
-		"NFL Network", "MLB Network", "NBA TV", "NHL Network", 
+		"NFL Network", "MLB Network", "NBA TV", "NHL TV", 
 		"Big Ten Network", "Pac-12 Network", "Galavision"
 	]);
 
