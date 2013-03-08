@@ -40,10 +40,10 @@ jQuery(function($) {
   }
 
   var dollars_to_number = function(it) {
-    it = it.replace(/^\$/, "");
-		it = it.replace(/,/, "");
-		it = parseFloat(it);
-		return it;
+    var no_dollars = it.replace(/^\$/, "");
+		var no_commas = no_dollars.replace(/,/, "");
+		var floatVal = parseFloat(it);
+		return floatVal;
   };
 
 	var network_checkbox = function(network) {
