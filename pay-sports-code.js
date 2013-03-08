@@ -95,7 +95,7 @@ jQuery(function($) {
 		$.each([' Network', ' TV'], function(index, suffix) {
 			var network = league + suffix;
 			if(carriage_fees[network]) {
-				amount += carriage_fees[network][carriage_fees.AMOUNT] * 12;
+				amount += carriage_fees[network][carriage_fees.MONTHLY_FEE] * 12;
 			}
 		});
 		update_amount(league, amount);
