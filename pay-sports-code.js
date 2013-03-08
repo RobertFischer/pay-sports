@@ -43,6 +43,7 @@ jQuery(function($) {
     it = it.replace(/^\$/, "");
 		it = it.replace(/,/, "");
 		it = parseFloat(it);
+		return it;
   };
 
 	var network_checkbox = function(network) {
