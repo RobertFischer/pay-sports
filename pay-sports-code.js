@@ -122,32 +122,19 @@ jQuery(function($) {
 				rights_fees[league][network] = dollars_to_number(amount);
 			});
 		});
+	});
 
-		fetchJSON("carriage_fees.json", carriage_fees, function(cr_data) {
-			$.each(cr_data, function(network, data) {
-				check_network(network, "carriage_fees.json");
-
-				$.each(data, function(field, value) {
-					if(field == carriage_fees.MONTHLY_FEE || field == carriage_fees.AMOUNT) {
-						carriage_fees[network][field] = dollars_to_number(value);
-					}
-				});
+	fetchJSON("carriage_fees.json", carriage_fees, function(cr_data) {
+		$.each(cr_data, function(network, data) {
+			$.each(data, function(field, value) {
+				if(field == carriage_fees.MONTHLY_FEE || field == carriage_fees.AMOUNT) {
+					carriage_fees[network][field] = dollars_to_number(value);
+				}
 			});
 		});
 	});
 
-	var check_league = function(league) {
-		// TODO Implement this
-		return true;
-	};
-
-	var check_network = function(network, source) {
-		// TODO Implement this
-		return true;
-	};
-
   var writeLeagueBlock = function(to, league) {
-		check_league(league);
 
     var league_block = $('<div class="league_block"></div>');
     league_block.data("amount", 0);
@@ -171,7 +158,6 @@ jQuery(function($) {
   };
 
   var writeNetworkBlock = function(to, network) {
-		check_network(network, "network blocks");
 
     var network_block = $('<div class="network_block"></div>');
     var checkbox = $('<input type="checkbox"></input>');
