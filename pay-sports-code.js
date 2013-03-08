@@ -42,7 +42,7 @@ jQuery(function($) {
   var dollars_to_number = function(it) {
     var no_dollars = it.replace(/^\$/, "");
 		var no_commas = no_dollars.replace(/,/, "");
-		var floatVal = parseFloat(it);
+		var floatVal = parseFloat(no_commas);
 		return floatVal;
   };
 
