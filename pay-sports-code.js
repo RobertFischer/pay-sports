@@ -40,7 +40,7 @@ jQuery(function($) {
   }
 
   var dollars_to_number = function(it) {
-    return parseFloat(it.replace(/^\$/, ""));
+    return parseFloat(it.replace(/^\$/, "").replace(/,/, ""));
   };
 
 	var network_checkbox = function(network) {
