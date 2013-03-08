@@ -92,7 +92,7 @@ jQuery(function($) {
 				amount += rights_fee / network_carriage_fees[carriage_fees.HOMES];
 			}
 		});
-		$.each([' Network', ' TV'], function(suffix) {
+		$.each([' Network', ' TV'], function(index, suffix) {
 			var network = league + suffix;
 			if(carriage_fees[network]) {
 				amount += carriage_fees[network][carriage_fees.AMOUNT] * 12;
