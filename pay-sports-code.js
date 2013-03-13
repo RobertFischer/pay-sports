@@ -1,6 +1,8 @@
 jQuery.noConflict();
 jQuery(function($) {
 
+	var leagues_with_networks = ["NBA", "NHL", "NFL", "MLB"];
+
 	var network_aliases = {
 		NBC: "NBC Sports Network",
 		CBS: "CBS Sports Network",
@@ -90,12 +92,14 @@ jQuery(function($) {
 				amount += rights_fee / network_carriage_fees[carriage_fees.HOMES];
 			}
 		});
-		$.each([' Network', ' TV'], function(index, suffix) {
-			var network = league + suffix;
-			if(network_checked(network) && carriage_fees[network]) {
-				amount += carriage_fees[network][carriage_fees.MONTHLY_FEE] * 12;
-			}
-		});
+		if($.inArray(league, leagues_with_networks)) {
+			$.each([' Network', ' TV'], function(index, suffix) {
+				var network = league + suffix;
+				if(network_checked(network) && carriage_fees[network]) {
+					amount += carriage_fees[network][carriage_fees.MONTHLY_FEE] * 12;
+				}
+			});	
+		}
 		update_amount(league, amount);
 	};
 
