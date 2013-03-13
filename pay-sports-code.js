@@ -92,7 +92,7 @@ jQuery(function($) {
 				amount += rights_fee / network_carriage_fees[carriage_fees.HOMES];
 			}
 		});
-		if($.inArray(league, leagues_with_networks)) {
+		if($.inArray(league, leagues_with_networks) >= 0) {
 			$.each([' Network', ' TV'], function(index, suffix) {
 				var network = league + suffix;
 				if(network_checked(network) && carriage_fees[network]) {
