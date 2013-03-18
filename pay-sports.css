@@ -35,8 +35,6 @@
   border: 1px solid black;
 }
 
-
-/* NASCAR */
-#league_row_third .league_block {
-	margin: auto;
+#league_row_empty {
+	height: 1ex;
 }
