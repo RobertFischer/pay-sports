@@ -1,6 +1,9 @@
 jQuery.noConflict();
 jQuery(function($) {
 
+	var json_domain = $.paysports_domain;
+	if(!json_domain) json_domain = window.location.pathname;
+
 	var leagues_with_networks = ["NBA", "NHL", "NFL", "MLB"];
 
 	var network_aliases = {
@@ -106,7 +109,7 @@ jQuery(function($) {
   var ajax_status = 0;
   var fetchJSON = function(url, object, callback) {
     ajax_status -= 1;
-    $.getJSON(url, function(data) {
+    $.getJSON(json_domain + "/" + url, function(data) {
       $.each(data, function(key, val) {
         object[key] = val;
       });
