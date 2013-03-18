@@ -109,7 +109,7 @@ jQuery(function($) {
   var ajax_status = 0;
   var fetchJSON = function(url, object, callback) {
     ajax_status -= 1;
-    $.getJSON(json_domain + "/" + url, function(data) {
+    $.getJSON(json_domain + url, function(data) {
       $.each(data, function(key, val) {
         object[key] = val;
       });
