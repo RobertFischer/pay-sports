@@ -29,6 +29,7 @@ jQuery(function($) {
   var network_checkboxes = {};
 
   var container = $("div[pay-sports]");
+	container = $("<center></center>").appendTo(container);
 
   var number_to_dollars = function(num) {
     if(isNaN(num)) {
