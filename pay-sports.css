@@ -1,12 +1,12 @@
-.network_container, .leagues_container {
+#network_container, #leagues_container {
 	width: 45%;
 }
 
-.network_container {
+#network_container {
 	float: left;
 }
 
-.leagues_container {
+#leagues_container {
 	float: right;
 }
 
@@ -23,7 +23,7 @@
   clear: both;
 }
 
-.league_block, .network_column {
+.league_block, .network_row {
   display: inline-block;
   margin: 20px;
 }
