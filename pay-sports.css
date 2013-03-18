@@ -1,3 +1,15 @@
+.network_container, .leagues_container {
+	width: 45%;
+}
+
+.network_container {
+	float: left;
+}
+
+.leagues_container {
+	float: right;
+}
+
 .league_row {
   width: 80%;
   clear: both;
@@ -13,8 +25,10 @@
 
 .league_block, .network_column {
   display: inline-block;
-  border: 1px solid black;
   margin: 20px;
 }
 
+.league_amount {
+  border: 1px solid black;
+}
 
