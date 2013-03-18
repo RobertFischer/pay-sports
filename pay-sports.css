@@ -25,7 +25,12 @@
 
 .league_block, .network_row {
   display: inline-block;
-  margin: 20px;
+}
+
+.league_block { 
+  margin-left: 10px;
+  margin-right: 10px;
+	margin-bottom: 5px;
 }
 
 .league_amount {
