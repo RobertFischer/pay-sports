@@ -50,3 +50,7 @@
 div[pay-sports] {
   font-family: Verdana, Geneva, sans-serif;
 }
+
+div[pay-sports] h3 {
+	margin-bottom: 40px;
+}
