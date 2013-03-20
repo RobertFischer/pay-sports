@@ -282,6 +282,10 @@ jQuery(function($) {
 	write_league_row(leagues_container, "sixth", [ "Big 12", "Pac-12", "SEC" ]);
 	write_league_row(leagues_container, "total", [ "Total" ]);
 
+	$('<h3 id="how_numbers_calculated">' + 
+		'<a href="http://www.whatyoupayforsports.com/numbers/">Click here to see how we calculate these numbers</a>' + 
+		'</h3>').appendTo(container);
+
 	$("input:checkbox:not([summary-option])", network_container).click(function() {
 		recalculate_costs();
 		if(!suspend_recalculation) $("input[summary-option]:checked", network_container).attr("checked", false);
