@@ -29,6 +29,7 @@
   margin-left: 10px;
   margin-right: 10px;
 	margin-bottom: 5px;
+	width: 6em;
 }
 
 .league_amount {
@@ -53,4 +54,8 @@ div[pay-sports] {
 
 div[pay-sports] h3 {
 	margin-bottom: 40px;
+}
+
+#league_row_total {
+	font-weight: bold;
 }
