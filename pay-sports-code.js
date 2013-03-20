@@ -86,11 +86,7 @@ jQuery(function($) {
       });
 			if(callback) callback(data);
       ajax_status += 1;
-			$(function() {
-				if(ajax_status == 0 && $("input:checkbox:checked", container).size() > 0) {
-					recalculate_costs();
-				}
-			});
+			recalculate_costs();
     });
     return object;
   };
@@ -133,16 +129,17 @@ jQuery(function($) {
 			});	
 		}
 		update_amount(league, amount);
+		return amount;
 	};
 
 	var suspend_recalculation = false;
 	var recalculate_costs = function() {
 		if(ajax_status == 0 && !suspend_recalculation) {
+			var amount = 0;
 			$.each(rights_fees, function(league, data) {
-				$(function() {
-					recalculate_league_costs(league, data);
-				});
+				amount += recalculate_league_costs(league, data);
 			});
+			update_amount("Total", amount);
 		};
 	};
 
@@ -153,9 +150,9 @@ jQuery(function($) {
 		recalculate_costs();
 	};
 
-  var writeLeagueBlock = function(to, league) {
+  var writeLeagueBlock = function(to, id_suffix, league) {
 
-    var league_block = $('<div class="league_block"></div>');
+    var league_block = $('<div class="league_block" id="league_block_' + id_suffix + '"></div>');
     league_block.data("amount", 0);
     league_block.appendTo(to);
 
@@ -171,7 +168,7 @@ jQuery(function($) {
   var write_league_row = function(to, id_suffix, leagues) {
     var row_block = $('<div class="league_row" id="league_row_' + id_suffix + '"></div>');
     for(var i = 0; i < leagues.length; i++) {
-      writeLeagueBlock(row_block, leagues[i]);
+      writeLeagueBlock(row_block, id_suffix + "_" + i, leagues[i]);
     }
     row_block.appendTo(to);
   };
@@ -284,6 +281,7 @@ jQuery(function($) {
 	write_league_row(leagues_container, "fourth", [ "BCS", "NCAA", "NIT" ]);
 	write_league_row(leagues_container, "fifth", [ "ACC", "Big East", "Big Ten" ]);
 	write_league_row(leagues_container, "sixth", [ "Big 12", "Pac-12", "SEC" ]);
+	write_league_row(leagues_container, "total", [ "Total" ]);
 
 	$("input:checkbox:not([summary-option])", network_container).click(function() {
 		recalculate_costs();
