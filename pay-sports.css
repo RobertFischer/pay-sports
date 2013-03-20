@@ -48,6 +48,10 @@
 	clear: both;
 }
 
+#how_numbers_calculated a {
+	text-decoration: none;
+}
+
 
 /*
 * Code generated for Dave
