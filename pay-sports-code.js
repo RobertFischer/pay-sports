@@ -274,9 +274,8 @@ jQuery(function($) {
 	leagues_container.append($('<h3>Here is How Much of Your Money Goes Directly to Major Pro and College Sports</h3>'));
 	leagues_container.appendTo(container);
 
-	write_league_row(leagues_container, "first", [ "NFL", "MLB", "NBA" ]);
-	write_league_row(leagues_container, "second", [ "NHL", "MLS", "EPL" ]);
-	write_league_row(leagues_container, "third", [ "NASCAR" ]);
+	write_league_row(leagues_container, "first", [ "NFL", "MLB", "NBA", "NHL" ]);
+	write_league_row(leagues_container, "second", [ "MLS", "EPL", "NASCAR" ]);
 	write_league_row(leagues_container, "empty", [ ]);
 	write_league_row(leagues_container, "fourth", [ "BCS", "NCAA", "NIT" ]);
 	write_league_row(leagues_container, "fifth", [ "ACC", "Big East", "Big Ten" ]);
