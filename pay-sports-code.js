@@ -76,36 +76,6 @@ jQuery(function($) {
 		});
   };
 
-	var recalculate_costs = function() {
-		$.each(rights_fees, function(league, data) {
-			$(function() {
-				recalculate_league_costs(league, data);
-			});
-		});
-	};
-
-	var recalculate_league_costs = function(league, data) {
-		var amount = 0;
-		$.each(data, function(network, rights_fee) {
-			if(network_checked(network)) {
-				var network_carriage_fees = carriage_fees[network];
-				if(!network_carriage_fees) {
-					var alias = network_aliases[network];
-					if(alias) network_carriage_fees = carriage_fees[alias];
-				}
-				amount += rights_fee / network_carriage_fees[carriage_fees.HOMES];
-			}
-		});
-		if($.inArray(league, leagues_with_networks) >= 0) {
-			$.each([' Network', ' TV'], function(index, suffix) {
-				var network = league + suffix;
-				if(network_checked(network) && carriage_fees[network]) {
-					amount += carriage_fees[network][carriage_fees.MONTHLY_FEE] * 12;
-				}
-			});	
-		}
-		update_amount(league, amount);
-	};
 
   var ajax_status = 0;
   var fetchJSON = function(url, object, callback) {
@@ -141,6 +111,47 @@ jQuery(function($) {
 			});
 		});
 	});
+
+	var recalculate_league_costs = function(league, data) {
+		var amount = 0;
+		$.each(data, function(network, rights_fee) {
+			if(network_checked(network)) {
+				var network_carriage_fees = carriage_fees[network];
+				if(!network_carriage_fees) {
+					var alias = network_aliases[network];
+					if(alias) network_carriage_fees = carriage_fees[alias];
+				}
+				amount += rights_fee / network_carriage_fees[carriage_fees.HOMES];
+			}
+		});
+		if($.inArray(league, leagues_with_networks) >= 0) {
+			$.each([' Network', ' TV'], function(index, suffix) {
+				var network = league + suffix;
+				if(network_checked(network) && carriage_fees[network]) {
+					amount += carriage_fees[network][carriage_fees.MONTHLY_FEE] * 12;
+				}
+			});	
+		}
+		update_amount(league, amount);
+	};
+
+	var suspend_recalculation = false;
+	var recalculate_costs = function() {
+		if(ajax_status == 0 && !suspend_recalculation) {
+			$.each(rights_fees, function(league, data) {
+				$(function() {
+					recalculate_league_costs(league, data);
+				});
+			});
+		};
+	};
+
+	var delay_recalculation = function(fun) {
+		suspend_recalculation = true;
+		fun();
+		suspend_recalculation = false;
+		recalculate_costs();
+	};
 
   var writeLeagueBlock = function(to, league) {
 
@@ -184,6 +195,68 @@ jQuery(function($) {
     network_column.appendTo(to);
   };
 
+	var write_network_summary_row = function(to, id_suffix) {
+    var network_column = $('<div class="network_row" id="network_row_' + id_suffix + '"></div>');
+		network_column.appendTo(to);
+
+		// Check All Networks
+		(function() {
+			var network_block = $('<div class="network_block"></div>');
+			network_block.appendTo(network_column);  // Now should be on the page
+			var checkbox = $('<input type="checkbox" id="check-all-networks" summary-option></input>');
+			checkbox.appendTo(network_block);
+			$('<span class="network_label">All Networks</span>').appendTo(network_block);
+			checkbox.click(function() {
+				if(checkbox.is(":checked")) {
+					delay_recalculation(function() {
+						$(":checkbox:not(:checked):not([summary-option])", to).click();
+					});
+				}
+			});
+		})();
+
+		// Check Most Common Networks (ESPN, Turner, Fox, NBC)
+		(function() {
+			var network_block = $('<div class="network_block"></div>');
+			network_block.appendTo(network_column);  // Now should be on the page
+			var checkbox = $('<input type="checkbox" id="check-common-networks" summary-option></input>');
+			checkbox.appendTo(network_block);
+			$('<span class="network_label">Most Common Networks</span>').appendTo(network_block);
+			checkbox.click(function() {
+				if(checkbox.is(":checked")) {
+					delay_recalculation(function() { 
+						$(":checkbox:checked:not([summary-option])", to).click();
+						$.each(["ESPN", "Turner", "Fox", "NBC"], function(index, network) {
+							network_checkbox(network).click();
+						});
+					});
+				}
+			});
+		})();
+
+		// Uncheck All
+		(function() {
+			var network_block = $('<div class="network_block"></div>');
+			network_block.appendTo(network_column);  // Now should be on the page
+			var checkbox = $('<input type="checkbox" id="uncheck-all-networks" summary-option></input>');
+			checkbox.appendTo(network_block);
+			$('<span class="network_label">Uncheck Networks</span>').appendTo(network_block);
+			checkbox.click(function() {
+				if(checkbox.is(":checked")) {
+					delay_recalculation(function() {
+						$(":checkbox:checked:not([summary-option])", to).click();
+					});
+				}
+			});
+		})();
+
+		$(":checkbox", network_column).click(function() {
+			var me = $(this);
+			$(":checkbox:checked[id!='" + me.attr("id") + "']", network_column).attr("checked", false);
+		});
+		
+	};
+
 	var network_container = $('<div id="network_container"></div>');
 	network_container.append($('<h3>Click on the Networks You Currently Receive from Your Pay TV Service</h3>'));
 	network_container.appendTo(container);
@@ -197,6 +270,9 @@ jQuery(function($) {
 		"Big Ten Network", "Pac-12 Network", "Galavision"
 	]);
 
+	$('<p class="network_divider"></p>').appendTo(network_container);
+	write_network_summary_row(network_container, "summary");
+
 	var leagues_container = $('<div id="leagues_container"></div>');
 	leagues_container.append($('<h3>Here is How Much of Your Money Goes Directly to Major Pro and College Sports</h3>'));
 	leagues_container.appendTo(container);
@@ -209,11 +285,9 @@ jQuery(function($) {
 	write_league_row(leagues_container, "fifth", [ "ACC", "Big East", "Big Ten" ]);
 	write_league_row(leagues_container, "sixth", [ "Big 12", "Pac-12", "SEC" ]);
 
-	$("input:checkbox", network_container).each(function() {
-		$(this).click(function() {
-			if(ajax_status == 0) recalculate_costs();
-			return true;
-		});
+	$("input:checkbox:not([summary-option])", network_container).click(function() {
+		recalculate_costs();
+		if(!suspend_recalculation) $("input[summary-option]:checked", network_container).attr("checked", false);
 	});
 
 });
