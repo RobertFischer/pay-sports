@@ -258,6 +258,9 @@ jQuery(function($) {
 	network_container.append($('<h3>Click on the Networks You Currently Receive from Your Pay TV Service</h3>'));
 	network_container.appendTo(container);
 
+	write_network_summary_row(network_container, "summary");
+	$('<p class="network_divider"></p>').appendTo(network_container);
+
 	write_network_row(network_container, "first", [
 		"ESPN (1/2)", "ESPNU", "TNT / TBS", "Fox Sports Networks", "Fox Soccer",
 		"NBC Sports Network", "CBS Sports Network"
@@ -267,8 +270,6 @@ jQuery(function($) {
 		"Big Ten Network", "Pac-12 Network", "Galavision"
 	]);
 
-	$('<p class="network_divider"></p>').appendTo(network_container);
-	write_network_summary_row(network_container, "summary");
 
 	var leagues_container = $('<div id="leagues_container"></div>');
 	leagues_container.append($('<h3>Here is How Much of Your Money Goes Directly to Major Pro and College Sports</h3>'));
