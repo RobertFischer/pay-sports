@@ -255,7 +255,7 @@ jQuery(function($) {
 	};
 
 	var network_container = $('<div id="network_container"></div>');
-	network_container.append($('<h3>Click on the Networks You Currently Receive from Your Pay TV Service</h3>'));
+	network_container.append($('<h3>Click on the networks you currently receive from your pay TV service.</h3>'));
 	network_container.appendTo(container);
 
 	write_network_summary_row(network_container, "summary");
@@ -272,7 +272,7 @@ jQuery(function($) {
 
 
 	var leagues_container = $('<div id="leagues_container"></div>');
-	leagues_container.append($('<h3>Here is How Much of Your Money Goes Directly to Major Pro and College Sports</h3>'));
+	leagues_container.append($('<h3>Here is how much of your money goes directly to major pro and college sports each year.</h3>'));
 	leagues_container.appendTo(container);
 
 	write_league_row(leagues_container, "first", [ "NFL", "MLB", "NBA", "NHL" ]);
@@ -284,7 +284,7 @@ jQuery(function($) {
 	write_league_row(leagues_container, "total", [ "Total" ]);
 
 	$('<h3 id="how_numbers_calculated">' + 
-		'<a href="http://www.whatyoupayforsports.com/numbers/">Click here to see how we calculate these numbers</a>' + 
+		'<a href="http://www.whatyoupayforsports.com/numbers/">Click here to see how we calculate these numbers.</a>' + 
 		'</h3>').appendTo(container);
 
 	$("input:checkbox:not([summary-option])", network_container).click(function() {
