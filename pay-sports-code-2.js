@@ -30,7 +30,7 @@ jQuery(function($) {
   var league_blocks = {};
   var network_checkboxes = {};
 
-  var container = $("div[pay-sports]");
+  var container = $("div[pay-sports-2]");
 	container = $("<center></center>").appendTo(container);
 
   var number_to_dollars = function(num) {
