@@ -23,6 +23,7 @@
 
 .league_block, .network_row {
   display: inline-block;
+	padding-left: 20px;
 }
 
 .league_block { 

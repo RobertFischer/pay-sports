@@ -13,7 +13,9 @@ jQuery(function($) {
 		ESPN: "ESPN (1/2)",
 		Fox: "Fox Sports Networks",
 		FOX: "Fox Sports Networks",
-		"Fox Sports": "Fox Sports Networks"
+		"Fox Sports": "Fox Sports Networks",
+		"Fox Sports (1/2)": "Fox Sports Networks",
+		"Mtn West": "Mountain West"
 	};
 
 	var rights_fees = {};
@@ -200,7 +202,7 @@ jQuery(function($) {
 		(function() {
 			var network_block = $('<div class="network_block"></div>');
 			network_block.appendTo(network_column);  // Now should be on the page
-			var checkbox = $('<input type="checkbox" id="check-all-networks" summary-option></input>');
+			var checkbox = $('<input type="radio" name="summary-options"  id="check-all-networks" summary-option></input>');
 			checkbox.appendTo(network_block);
 			$('<span class="network_label">All Networks</span>').appendTo(network_block);
 			checkbox.click(function() {
@@ -216,7 +218,7 @@ jQuery(function($) {
 		(function() {
 			var network_block = $('<div class="network_block"></div>');
 			network_block.appendTo(network_column);  // Now should be on the page
-			var checkbox = $('<input type="checkbox" id="check-common-networks" summary-option></input>');
+			var checkbox = $('<input type="radio" name="summary-options" id="check-common-networks" summary-option></input>');
 			checkbox.appendTo(network_block);
 			$('<span class="network_label">Most Common Networks</span>').appendTo(network_block);
 			checkbox.click(function() {
@@ -235,7 +237,7 @@ jQuery(function($) {
 		(function() {
 			var network_block = $('<div class="network_block"></div>');
 			network_block.appendTo(network_column);  // Now should be on the page
-			var checkbox = $('<input type="checkbox" id="uncheck-all-networks" summary-option></input>');
+			var checkbox = $('<input type="radio" name="summary-options" id="uncheck-all-networks" summary-option></input>');
 			checkbox.appendTo(network_block);
 			$('<span class="network_label">Uncheck Networks</span>').appendTo(network_block);
 			checkbox.click(function() {
@@ -247,10 +249,12 @@ jQuery(function($) {
 			});
 		})();
 
+/*
 		$(":checkbox", network_column).click(function() {
 			var me = $(this);
 			$(":checkbox:checked[id!='" + me.attr("id") + "']", network_column).attr("checked", false);
 		});
+*/
 		
 	};
 
@@ -262,25 +266,26 @@ jQuery(function($) {
 	$('<p class="network_divider"></p>').appendTo(network_container);
 
 	write_network_row(network_container, "first", [
-		"ESPN (1/2)", "ESPNU", "TNT / TBS", "Fox Sports Networks", "Fox Soccer",
-		"NBC Sports Network", "CBS Sports Network"
+		"ESPN (1/2)", "ESPNU", "TNT / TBS", "Fox Sports (1/2)", 
+		"NBC Sports Network", "CBS Sports Network", "Galavision"
 	]);
 	write_network_row(network_container, "second", [
 		"NFL Network", "MLB Network", "NBA TV", "NHL TV", 
-		"Big Ten Network", "Pac-12 Network", "Galavision"
+		"Big Ten Network", "Pac-12 Network"
 	]);
 
 
 	var leagues_container = $('<div id="leagues_container"></div>');
-	leagues_container.append($('<h3>Here is how much of your money goes directly to major pro and college sports each year.</h3>'));
+	leagues_container.append($('<h3>Here is how much of your money those networks give to major pro and college sports each year.</h3>'));
 	leagues_container.appendTo(container);
 
 	write_league_row(leagues_container, "first", [ "NFL", "MLB", "NBA", "NHL" ]);
-	write_league_row(leagues_container, "second", [ "MLS", "EPL", "NASCAR" ]);
+	write_league_row(leagues_container, "second", [ "MLS", "EPL", "FIFA", "UEFA" ]);
+	write_league_row(leagues_container, "third", [ "NASCAR", "UFC" ]);
 	write_league_row(leagues_container, "empty", [ ]);
-	write_league_row(leagues_container, "fourth", [ "BCS", "NCAA", "NIT" ]);
-	write_league_row(leagues_container, "fifth", [ "ACC", "Big East", "Big Ten" ]);
-	write_league_row(leagues_container, "sixth", [ "Big 12", "Pac-12", "SEC" ]);
+	write_league_row(leagues_container, "fourth", [ "NCAA", "BCS", "ACC", "Big Ten" ]);
+	write_league_row(leagues_container, "fifth", [ "Big 12", "Big East", "Pac-12", "SEC" ]);
+	write_league_row(leagues_container, "sixth", [ "ACC", "C*USA", "Mtn West" ]);
 	write_league_row(leagues_container, "total", [ "Total" ]);
 
 	$('<h3 id="how_numbers_calculated">' + 

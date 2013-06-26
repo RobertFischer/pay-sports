@@ -18,7 +18,7 @@ my %data_pages = (
     file => "carriage_fees",
     key => "Network"
   },
-  'https://docs.google.com/spreadsheet/pub?key=0Asznh-RbUyRIdEdLRVQ3bU80VG1Mc1ZXMDExcUNhTmc&single=true&gid=2&range=A3%3AD100&output=csv' => {
+  'https://docs.google.com/spreadsheet/pub?key=0Asznh-RbUyRIdEdLRVQ3bU80VG1Mc1ZXMDExcUNhTmc&single=true&gid=5&range=A3%3AD40&output=csv' => {
     file => "rights_fees_original",
     key => "Key"
   },
