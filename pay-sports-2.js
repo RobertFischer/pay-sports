@@ -7,7 +7,7 @@
 	// var domain = "file:///Users/robert/wkdir/pay-sports/";
 
 	document.write('<link rel="stylesheet" type="text/css" href="' + domain + 'pay-sports-2.css">');
-	document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>');
+	document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>');
 	document.write('<script>$.paysports_domain = "' + domain + '";</script>');
 	document.write('<script src="' + domain + 'pay-sports-code-2.js"></script>');
 })();
