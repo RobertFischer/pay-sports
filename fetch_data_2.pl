@@ -68,7 +68,7 @@ my %json = %{decode_json(scalar(<$fh>))};
 close $fh;
 my %new_rights = ();
 while(my($key,$data) = each %json) {
-	$new_rights{$data->{League}}->{$data->{Network}} = $data->{'Per Year (millions)'};
+	$new_rights{$data->{League}}->{$data->{Network}} = $data->{'Payout (millions)'};
 }
 ($fh,$filename) = tempfile();
 print $fh encode_json(\%new_rights);
