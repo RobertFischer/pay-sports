@@ -1,55 +1,55 @@
-#network_container, #leagues_container {
+div[pay-sports-2] #network_container, #leagues_container {
 	width: 47%;
 }
 
-#network_container {
+div[pay-sports-2] #network_container {
 	float: left;
 }
 
-#leagues_container {
+div[pay-sports-2] #leagues_container {
 	float: right;
 }
 
-.league_row {
+div[pay-sports-2] .league_row {
   clear: both;
   margin: auto;
 }
 
-.league_amount, .league_name {
+div[pay-sports-2] .league_amount, .league_name {
   width: 100%;
   text-align: center;
   clear: both;
 }
 
-.league_block, .network_row {
+div[pay-sports-2] .league_block, .network_row {
   display: inline-block;
 	padding-left: 20px;
 }
 
-.league_block { 
+div[pay-sports-2] .league_block { 
   margin-left: 10px;
   margin-right: 10px;
 	margin-bottom: 10px;
 	width: 6em;
 }
 
-.league_amount {
+div[pay-sports-2] .league_amount {
   border: 1px solid black;
 }
 
-#league_row_empty {
+div[pay-sports-2] #league_row_empty {
 	height: 1ex;
 }
 
-.network_block {
+div[pay-sports-2] .network_block {
 	text-align: left;
 }
 
-#how_numbers_calculated {
+div[pay-sports-2] #how_numbers_calculated {
 	clear: both;
 }
 
-#how_numbers_calculated a {
+div[pay-sports-2] #how_numbers_calculated a {
 	text-decoration: none;
 }
 
@@ -57,14 +57,14 @@
 /*
 * Code generated for Dave
 */ 
-div[pay-sports] {
+div[pay-sports-2] {
   font-family: Verdana, Geneva, sans-serif;
 }
 
-div[pay-sports] h3 {
+div[pay-sports-2] h3 {
 	margin-bottom: 40px;
 }
 
-#league_row_total {
+div[pay-sports-2] #league_row_total {
 	font-weight: bold;
 }
