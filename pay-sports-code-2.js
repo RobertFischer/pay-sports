@@ -62,7 +62,7 @@ jQuery(function($) {
 		return floatVal;
   };
 
-	var find_carriage_fees = var(network) {
+	var find_carriage_fees = function(network) {
 		var it = carriage_fees[network];
 		if(!it) {
 			var alias = network_aliases[network];
