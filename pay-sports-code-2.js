@@ -21,7 +21,9 @@ jQuery(function($) {
 		"NFL Network": "NFL TV",
 		"NFL TV": "NFL Network",
 		"NBA Network": "NBA TV",
-		"NBA TV": "NBA Network"
+		"NBA TV": "NBA Network",
+		"MLB Network": "MLB TV",
+		"MLB TV": "MLB Network"
 	};
 
 	var rights_fees = {};
