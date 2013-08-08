@@ -66,9 +66,11 @@ jQuery(function($) {
 		var it = carriage_fees[network];
 		if(!it) {
 			var alias = network_aliases[network];
-			if(alias) it = carriage_fees[network];
+			if(alias) it = carriage_fees[alias];
 		}
-		if(!it) alert("Could not find carriage fees: " + it);
+		if(!it) {
+			alert("Could not find carriage fees: " + network);
+		}
 		return it;
 	}
 
