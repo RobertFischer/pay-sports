@@ -6,6 +6,11 @@ jQuery(function($) {
 
 	var leagues_with_networks = ["NBA", "NHL", "NFL", "MLB"];
 
+	var league_aliases = {
+		"Mtn West": "Mountain West",
+		"Mountain West": "Mtn West"
+	};
+
 	var network_aliases = {
 		NBC: "NBC Sports Network",
 		CBS: "CBS Sports Network",
@@ -15,16 +20,12 @@ jQuery(function($) {
 		FOX: "Fox Sports (1/2)",
 		"Fox Sports": "Fox Sports (1/2)",
 		"Fox Sports Networks": "Fox Sports (1/2)",
-		"Mtn West": "Mountain West",
-		"NHL Network": "NHL TV",
-		"NHL TV": "NHL Network",
-		"NFL Network": "NFL TV",
-		"NFL TV": "NFL Network",
-		"NBA Network": "NBA TV",
-		"NBA TV": "NBA Network",
-		"MLB Network": "MLB TV",
-		"MLB TV": "MLB Network"
+		"Mtn West": "Mountain West"
 	};
+	$.each(leagues_with_networks, function(idx,league) {
+		network_aliases[league + " TV"] = network_aliases[league + " Network"];
+		network_aliases[league + " Network"] = network_aliases[league + " TV"];
+	});
 
 	var rights_fees = {};
 
@@ -95,6 +96,10 @@ jQuery(function($) {
   var update_amount = function(league, amount) {
 		$(function() {
 			var block = league_blocks[league];
+			if(!block) {
+				var alias = league_aliases[league];
+				if(alias) block = league_blocks[alias];
+			}
 			if(block) {	
 				$('.league_amount', block).text(number_to_dollars(amount));	
 			} else if(amount > 0) {
@@ -305,7 +310,7 @@ jQuery(function($) {
 	write_league_row(leagues_container, "empty", [ ]);
 	write_league_row(leagues_container, "fourth", [ "NCAA", "BCS", "ACC", "Big Ten" ]);
 	write_league_row(leagues_container, "fifth", [ "Big 12", "Big East", "Pac-12", "SEC" ]);
-	write_league_row(leagues_container, "sixth", [ "ACC", "C*USA", "Mtn West" ]);
+	write_league_row(leagues_container, "sixth", [ "AAC", "C*USA", "Mtn West" ]);
 	write_league_row(leagues_container, "total", [ "Total" ]);
 
 	$('<h3 id="how_numbers_calculated">' + 
