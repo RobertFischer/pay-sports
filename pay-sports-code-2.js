@@ -11,11 +11,17 @@ jQuery(function($) {
 		CBS: "CBS Sports Network",
 		Turner: "TNT / TBS",
 		ESPN: "ESPN (1/2)",
-		Fox: "Fox Sports Networks",
-		FOX: "Fox Sports Networks",
-		"Fox Sports": "Fox Sports Networks",
-		"Fox Sports (1/2)": "Fox Sports Networks",
-		"Mtn West": "Mountain West"
+		Fox: "Fox Sports (1/2)",
+		FOX: "Fox Sports (1/2)",
+		"Fox Sports": "Fox Sports (1/2)",
+		"Fox Sports Networks": "Fox Sports (1/2)",
+		"Mtn West": "Mountain West",
+		"NHL Network": "NHL TV",
+		"NHL TV": "NHL Network",
+		"NFL Network": "NFL TV",
+		"NFL TV": "NFL Network",
+		"NBA Network": "NBA TV",
+		"NBA TV": "NBA Network"
 	};
 
 	var rights_fees = {};
@@ -56,10 +62,8 @@ jQuery(function($) {
 
 	var network_checkbox = function(network) {
 		var it = network_checkboxes[network];
-		var alias = network;
-		for(var i = 0; i < 5; i++) {
-			if(it) return it;
-			if(alias) alias = network_aliases[alias];
+		if(!it) {
+			var alias = network_aliases[alias];
 			if(alias) it = network_checkboxes[alias];
 		}
 		if(!it) alert("Could not find checkbox for: " + network);
@@ -273,7 +277,7 @@ jQuery(function($) {
 		"NBC Sports Network", "CBS Sports Network", "Galavision"
 	]);
 	write_network_row(network_container, "second", [
-		"NFL Network", "MLB Network", "NBA TV", "NHL TV", 
+		"NFL Network", "MLB Network", "NBA TV", "NHL Network", 
 		"Big Ten Network", "Pac-12 Network"
 	]);
 
