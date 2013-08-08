@@ -62,6 +62,16 @@ jQuery(function($) {
 		return floatVal;
   };
 
+	var find_carriage_fees = var(network) {
+		var it = carriage_fees[network];
+		if(!it) {
+			var alias = network_aliases[network];
+			if(alias) it = carriage_fees[network];
+		}
+		if(!it) alert("Could not find carriage fees: " + it);
+		return it;
+	}
+
 	var network_checkbox = function(network) {
 		var it = network_checkboxes[network];
 		if(!it) {
@@ -113,7 +123,7 @@ jQuery(function($) {
 		$.each(cr_data, function(network, data) {
 			$.each(data, function(field, value) {
 				if(field == carriage_fees.MONTHLY_FEE || field == carriage_fees.AMOUNT) {
-					carriage_fees[network][field] = dollars_to_number(value);
+					find_carriage_fees(network)[field] = dollars_to_number(value);
 				}
 			});
 		});
@@ -123,19 +133,14 @@ jQuery(function($) {
 		var amount = 0;
 		$.each(data, function(network, rights_fee) {
 			if(network_checked(network)) {
-				var network_carriage_fees = carriage_fees[network];
-				if(!network_carriage_fees) {
-					var alias = network_aliases[network];
-					if(alias) network_carriage_fees = carriage_fees[alias];
-				}
-				amount += rights_fee / network_carriage_fees[carriage_fees.HOMES];
+				amount += rights_fee / find_carriage_fees(network)[carriage_fees.HOMES];
 			}
 		});
 		if($.inArray(league, leagues_with_networks) >= 0) {
 			$.each([' Network', ' TV'], function(index, suffix) {
 				var network = league + suffix;
-				if(network_checked(network) && carriage_fees[network]) {
-					amount += carriage_fees[network][carriage_fees.MONTHLY_FEE] * 12;
+				if(network_checked(network) && find_carriage_fees(network)) {
+					amount += find_carriage_fees(network)[carriage_fees.MONTHLY_FEE] * 12;
 				}
 			});	
 		}
