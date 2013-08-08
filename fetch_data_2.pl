@@ -75,3 +75,4 @@ print $fh encode_json(\%new_rights);
 close $fh;
 move($filename, "rights_fees.json") or die "Could not rename the fixed rights temp file to rights_fees.json";
 chmod 0644, "rights_fees.json";
+

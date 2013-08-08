@@ -95,7 +95,11 @@ jQuery(function($) {
   var update_amount = function(league, amount) {
 		$(function() {
 			var block = league_blocks[league];
-			$('.league_amount', block).text(number_to_dollars(amount));	
+			if(block) {	
+				$('.league_amount', block).text(number_to_dollars(amount));	
+			} else if(amount > 0) {
+				alert("Could not find league block for :" + league);
+			}
 		});
   };
 
