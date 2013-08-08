@@ -63,7 +63,7 @@ jQuery(function($) {
 	var network_checkbox = function(network) {
 		var it = network_checkboxes[network];
 		if(!it) {
-			var alias = network_aliases[alias];
+			var alias = network_aliases[network];
 			if(alias) it = network_checkboxes[alias];
 		}
 		if(!it) alert("Could not find checkbox for: " + network);
