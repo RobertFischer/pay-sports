@@ -23,8 +23,8 @@ jQuery(function($) {
 		"Mtn West": "Mountain West"
 	};
 	$.each(leagues_with_networks, function(idx,league) {
-		network_aliases[league + " TV"] = network_aliases[league + " Network"];
-		network_aliases[league + " Network"] = network_aliases[league + " TV"];
+		network_aliases[league + " TV"] = league + " Network";
+		network_aliases[league + " Network"] = league + " TV";
 	});
 
 	var rights_fees = {};
