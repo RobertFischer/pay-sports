@@ -4,7 +4,7 @@ jQuery(function($) {
 	var json_domain = $.paysports_domain;
 	if(!json_domain) json_domain = window.location.pathname;
 
-	var leagues_with_networks = ["NBA", "NHL", "NFL", "MLB"];
+	var leagues_with_networks = ["NBA", "NHL", "NFL", "MLB", "SEC"];
 
 	var league_aliases = {
 		"Mtn West": "Mountain West",
@@ -45,7 +45,7 @@ jQuery(function($) {
   var number_to_dollars = function(num) {
     if(isNaN(num)) {
 			alert("Found NaN");
-			return "$$$";	
+			return "$$$";
 		}
     num = (Math.round(num*100)/100).toString();
     if(/^\d+$/.test(num)) {
@@ -54,7 +54,7 @@ jQuery(function($) {
       num = num + "0";
     }
     return "$" + num;
-  }
+  };
 
   var dollars_to_number = function(it) {
     var no_dollars = it.replace(/^\$/, "");
@@ -73,7 +73,7 @@ jQuery(function($) {
 			alert("Could not find carriage fees: " + network);
 		}
 		return it;
-	}
+	};
 
 	var network_checkbox = function(network) {
 		var it = network_checkboxes[network];
@@ -89,9 +89,9 @@ jQuery(function($) {
 		var it = network_checkbox(network);
 		if(it) {
 			return it.is(":checked");
-		} 
+		}
 		return false;
-  }
+  };
 
   var update_amount = function(league, amount) {
 		$(function() {
@@ -100,8 +100,8 @@ jQuery(function($) {
 				var alias = league_aliases[league];
 				if(alias) block = league_blocks[alias];
 			}
-			if(block) {	
-				$('.league_amount', block).text(number_to_dollars(amount));	
+			if(block) {
+				$('.league_amount', block).text(number_to_dollars(amount));
 			} else if(amount > 0) {
 				alert("Could not find league block for :" + league);
 			}
@@ -153,7 +153,7 @@ jQuery(function($) {
 				if(network_checked(network) && find_carriage_fees(network)) {
 					amount += find_carriage_fees(network)[carriage_fees.MONTHLY_FEE] * 12;
 				}
-			});	
+			});
 		}
 		update_amount(league, amount);
 		return amount;
@@ -161,13 +161,13 @@ jQuery(function($) {
 
 	var suspend_recalculation = false;
 	var recalculate_costs = function() {
-		if(ajax_status == 0 && !suspend_recalculation) {
+		if(ajax_status === 0 && !suspend_recalculation) {
 			var amount = 0;
 			$.each(rights_fees, function(league, data) {
 				amount += recalculate_league_costs(league, data);
 			});
 			update_amount("Total", amount);
-		};
+		}
 	};
 
 	var delay_recalculation = function(fun) {
@@ -248,7 +248,7 @@ jQuery(function($) {
 			$('<span class="network_label">Most Common Networks</span>').appendTo(network_block);
 			checkbox.click(function() {
 				if(checkbox.is(":checked")) {
-					delay_recalculation(function() { 
+					delay_recalculation(function() {
 						$(":checkbox:checked:not([summary-option])", to).click();
 						$.each(["ESPN", "Turner", "Fox", "NBC"], function(index, network) {
 							network_checkbox(network).click();
@@ -280,7 +280,7 @@ jQuery(function($) {
 			$(":checkbox:checked[id!='" + me.attr("id") + "']", network_column).attr("checked", false);
 		});
 */
-		
+
 	};
 
 	var network_container = $('<div id="network_container"></div>');
@@ -291,12 +291,12 @@ jQuery(function($) {
 	$('<p class="network_divider"></p>').appendTo(network_container);
 
 	write_network_row(network_container, "first", [
-		"ESPN (1/2)", "ESPNU", "TNT / TBS", "Fox Sports (1/2)", 
+		"ESPN (1/2)", "ESPNU", "TNT / TBS", "Fox Sports (1/2)",
 		"NBC Sports Network", "CBS Sports Network", "Galavision"
 	]);
 	write_network_row(network_container, "second", [
-		"NFL Network", "MLB Network", "NBA TV", "NHL Network", 
-		"Big Ten Network", "Pac-12 Network"
+		"NFL Network", "MLB Network", "NBA TV", "NHL Network",
+		"Big Ten Network", "Pac-12 Network", "SEC Network"
 	]);
 
 
@@ -313,8 +313,8 @@ jQuery(function($) {
 	write_league_row(leagues_container, "sixth", [ "AAC", "C*USA", "Mtn West" ]);
 	write_league_row(leagues_container, "total", [ "Total" ]);
 
-	$('<h3 id="how_numbers_calculated">' + 
-		'<a href="http://www.whatyoupayforsports.com/numbers/">Click here to see how we calculate these numbers.</a>' + 
+	$('<h3 id="how_numbers_calculated">' +
+		'<a href="http://www.whatyoupayforsports.com/numbers/">Click here to see how we calculate these numbers.</a>' +
 		'</h3>').appendTo(container);
 
 	$("input:checkbox:not([summary-option])", network_container).click(function() {
