@@ -65,13 +65,31 @@ jQuery(function($) {
 
 	var find_carriage_fees = function(network) {
 		var it = carriage_fees[network];
+    var alias = null;
 		if(!it) {
-			var alias = network_aliases[network];
+			alias = network_aliases[network];
 			if(alias) it = carriage_fees[alias];
 		}
+    if(!it && (network == "FOX" || alias == "FOX")) {
+      // TODO We should probably merge this in the data fetch instead of special casing it here.
+      var fs1 = find_carriage_fees("Fox Sports 1");
+      var fs2 = find_carriage_fees("Fox Sports 2");
+      it = {};
+      it[carriage_fees.NETWORK] = "FOX";
+      it[carriage_fees.MONTHLY_FEE] = fs1[carriage_fees.MONTHLY_FEE] + fs2[carriage_fees.MONTHLY_FEE];
+      it[carriage_fees.HOMES] = fs1[carriage_fees.HOMES] + fs2[carriage_fees.HOMES];
+      it[carriage_fees.AMOUNT] = fs1[carriage_fees.AMOUNT] + fs2[carriage_fees.AMOUNT];
+    }
 		if(!it) {
-			alert("Could not find carriage fees: " + network);
+			console.error("Could not find carriage fees: " + network);
+      console.info("Carriage fees:");
+      console.dir(carriage_fees);
+      console.info("Network aliases:");
+      console.dir(network_aliases);
 		}
+    if(typeof it[carriage_fees.HOMES] === "string") {
+      it[carriage_fees.HOMES] = parseFloat(it[carriage_fees.HOMES]);
+    }
 		return it;
 	};
 
@@ -144,7 +162,12 @@ jQuery(function($) {
 		var amount = 0;
 		$.each(data, function(network, rights_fee) {
 			if(network_checked(network)) {
-				amount += rights_fee / find_carriage_fees(network)[carriage_fees.HOMES];
+        try {
+				  amount += rights_fee / find_carriage_fees(network)[carriage_fees.HOMES];
+        } catch(e) {
+          console.error("Error processing carriage fees for " + network + ": " + e);
+          console.dir(e);
+        }
 			}
 		});
 		if($.inArray(league, leagues_with_networks) >= 0) {
@@ -299,7 +322,6 @@ jQuery(function($) {
 		"Big Ten Network", "Pac-12 Network", "SEC Network"
 	]);
 
-
 	var leagues_container = $('<div id="leagues_container"></div>');
 	leagues_container.append($('<h3>Here is how much of your money those networks give to major pro and college sports each year.</h3>'));
 	leagues_container.appendTo(container);
@@ -318,8 +340,9 @@ jQuery(function($) {
 		'</h3>').appendTo(container);
 
 	$("input:checkbox:not([summary-option])", network_container).click(function() {
-		recalculate_costs();
+    recalculate_costs();
 		if(!suspend_recalculation) $("input[summary-option]:checked", network_container).attr("checked", false);
 	});
 
 });
+

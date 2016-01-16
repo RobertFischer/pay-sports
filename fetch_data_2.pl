@@ -13,6 +13,8 @@ use Text::CSV::Hashify;
 use File::Temp "tempfile";
 use File::Copy;
 
+$| = 1;  # Autoflush
+
 my %data_pages = (
   'https://docs.google.com/spreadsheet/pub?key=0Asznh-RbUyRIdEdLRVQ3bU80VG1Mc1ZXMDExcUNhTmc&single=true&gid=0&range=A3%3AD100&output=csv' => {
     file => "carriage_fees",
@@ -44,7 +46,7 @@ while(my($src,$file_data) = each %data_pages) {
   # Take out the empty lines
   ($fh,$filename) = tempfile();
   open(my $csvfh, "<", "$file.csv") or die "Cannot open the CSV file for filtering: $!";
-  foreach my $line (grep(!/^,*$/, <$csvfh>)) {
+  foreach my $line (grep(!/^(,|\s)*$/, <$csvfh>)) {
     chomp $line;
     print $fh $line;
     print $fh "\n";
